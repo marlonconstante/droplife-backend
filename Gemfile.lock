@@ -1,17 +1,21 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    addressable (2.3.5)
     daemons (1.1.9)
     eventmachine (1.0.3)
     httparty (0.11.0)
       multi_json (~> 1.0)
       multi_xml (>= 0.5.2)
     json (1.7.7)
+    launchy (2.4.2)
+      addressable (~> 2.3)
     multi_json (1.9.0)
     multi_xml (0.5.5)
     orchestrate.io (0.1.6)
       httparty (< 0.12.0)
       json (< 1.8.0)
+    pdfkit (0.6.1)
     rack (1.5.2)
     rack-protection (1.5.2)
       rack
@@ -24,11 +28,15 @@ GEM
       eventmachine (>= 1.0.0)
       rack (>= 1.0.0)
     tilt (1.4.1)
+    wkhtmltopdf-binary (0.9.9.1)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
+  launchy
   orchestrate.io
+  pdfkit
   sinatra (~> 1.4.4)
   thin
+  wkhtmltopdf-binary

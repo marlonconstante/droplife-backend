@@ -1,4 +1,6 @@
 require "sinatra"
+require "pdfkit"
+require "launchy"
 require "./src/ruby/orchestrate"
 
 get "/experiencia/pesquisa" do
@@ -14,6 +16,14 @@ end
 delete "/experiencia/remover/*" do |key|
   protected!
   Orchestrate.new().delete("Experiencia", key)
+end
+
+get "/voucher" do
+  protected!
+
+  kit = PDFKit.new(File.new("src/views/templates/voucher.html"))
+  kit.to_file("files/voucher.pdf")
+  Launchy::Browser.run("files/voucher.pdf")
 end
 
 get "/cadastro/*/*" do |path, file|
