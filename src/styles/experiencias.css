@@ -12,6 +12,27 @@ h1+label,
     margin-top: 0;
 }
 
+@media (max-width: 767px) {
+    .logo {
+        text-align: center;
+    }
+
+    .logo img {
+        width: 65%;
+    }
+}
+
+@media (min-width: 768px) {
+    .logo {
+        float: right;
+        margin-top: 1.7em;
+    }
+
+    .logo img {
+        width: 9.5em;
+    }
+}
+
 .panel-group {
     margin-top: 1em;
     margin-bottom: 0;
