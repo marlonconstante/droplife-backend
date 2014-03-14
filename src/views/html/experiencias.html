@@ -55,7 +55,7 @@
 
                                     <div class="input-group-btn">
                                         <button type="button" class="btn btn-default"
-                                                data-bind="click: $root.add($root.selected.parceiro.contatos, { nome: undefined, telefone: undefined })">
+                                                data-bind="click: $root.add($root.selected.parceiro.contatos, { nome: '', telefone: '' })">
                                             <i class="glyphicon glyphicon-plus"></i>
                                         </button>
 
@@ -91,7 +91,7 @@
 
                                     <div class="input-group-btn">
                                         <button type="button" class="btn btn-default"
-                                                data-bind="click: $root.add($root.selected.termos, { descricao: undefined })">
+                                                data-bind="click: $root.add($root.selected.termos, { descricao: '' })">
                                             <i class="glyphicon glyphicon-plus"></i>
                                         </button>
 
@@ -110,12 +110,13 @@
 
             <div class="btn-group">
                 <a class="btn btn-primary" role="button"
-                   data-bind="click: save">Salvar</a>
+                   data-bind="click: save,
+                  css: { 'disabled': !selected.codigo() }">Salvar</a>
                 <a class="btn btn-default" role="button"
                    data-bind="click: clear">Limpar</a>
                 <a class="btn btn-danger" role="button"
                    data-bind="click: exclude,
-                  css: { disabled: !selected.codigo() }">Remover</a>
+                  css: { 'disabled': !selected.codigo() }">Remover</a>
             </div>
 
         </div>
@@ -132,7 +133,8 @@
                 </tr>
                 </thead>
                 <tbody data-bind="foreach: values">
-                <tr data-bind="click: $root.edit($data)">
+                <tr data-bind="click: $root.edit($data),
+                  css: { 'row-editing': $root.selected.codigo() == $data.codigo }">
                     <td data-bind="text: codigo"></td>
                     <td data-bind="text: descricao"></td>
                     <td data-bind="text: parceiro.nome"></td>

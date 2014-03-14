@@ -37,3 +37,7 @@ h1+label,
     margin: 1em 0 1em;
     float: right;
 }
+
+.row-editing {
+    background-color: #eee;
+}
