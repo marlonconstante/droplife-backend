@@ -1,5 +1,4 @@
 require "orchestrate.io"
-require "json"
 
 class Orchestrate
   API_KEY = "f90dde76-cee4-4524-80f7-77493b6d1f1f:"
@@ -12,6 +11,21 @@ class Orchestrate
     @io.search :get do
       collection collection
       query query
+    end.perform.to_json
+  end
+
+  def save(collection, key, data)
+    @io.key_value :put do
+      collection collection
+      key key
+      data data
+    end.perform
+  end
+
+  def delete(collection, key)
+    @io.key_value :delete do
+      collection collection
+      key key
     end.perform
   end
 

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Cadastro de Experiências</title>
+
+    <link href="../../libs/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../styles/experiencias.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-5">
+            <h1>Experiência</h1>
+
+            <label>Código</label>
+            <input type="text" class="form-control" data-bind="value: selected.codigo">
+
+            <label>Descrição</label>
+            <input type="text" class="form-control" data-bind="value: selected.descricao">
+
+            <label>Local</label>
+            <input type="text" class="form-control" data-bind="value: selected.local">
+
+            <label>Preço</label>
+            <input type="text" class="form-control" data-bind="value: selected.preco">
+
+            <div id="parceiroPanel" class="panel-group">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#parceiroPanel" href="#parceiro">
+                                Parceiro
+                            </a>
+                        </h3>
+                    </div>
+
+                    <div id="parceiro" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <label>Nome</label>
+                            <input type="text" class="form-control" data-bind="value: selected.parceiro.nome">
+
+                            <label>Contatos</label>
+
+                            <div class="list-row" data-bind="foreach: selected.parceiro.contatos">
+                                <div class="input-group">
+                                    <input type="text" class="form-control half-width" placeholder="Nome"
+                                           data-bind="value: nome">
+                                    <input type="text" class="form-control half-width" placeholder="Telefone"
+                                           data-bind="value: telefone">
+
+                                    <div class="input-group-btn">
+                                        <button type="button" class="btn btn-default"
+                                                data-bind="click: $root.add($root.selected.parceiro.contatos, { nome: undefined, telefone: undefined })">
+                                            <i class="glyphicon glyphicon-plus"></i>
+                                        </button>
+
+                                        <button type="button" class="btn btn-default"
+                                                data-bind="click: $root.remove($root.selected.parceiro.contatos, $data),
+                                                   enable: $root.selected.parceiro.contatos().length > 1">
+                                            <i class="glyphicon glyphicon-minus"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="termosPanel" class="panel-group">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#termosPanel" href="#termos">
+                                Termos de uso
+                            </a>
+                        </h3>
+                    </div>
+
+                    <div id="termos" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <div class="list-row" data-bind="foreach: selected.termos">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" placeholder="Descrição"
+                                           data-bind="value: descricao">
+
+                                    <div class="input-group-btn">
+                                        <button type="button" class="btn btn-default"
+                                                data-bind="click: $root.add($root.selected.termos, { descricao: undefined })">
+                                            <i class="glyphicon glyphicon-plus"></i>
+                                        </button>
+
+                                        <button type="button" class="btn btn-default"
+                                                data-bind="click: $root.remove($root.selected.termos, $data),
+                                                   enable: $root.selected.termos().length > 1">
+                                            <i class="glyphicon glyphicon-minus"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="btn-group">
+                <a class="btn btn-primary" role="button"
+                   data-bind="click: save">Salvar</a>
+                <a class="btn btn-default" role="button"
+                   data-bind="click: clear">Limpar</a>
+                <a class="btn btn-danger" role="button"
+                   data-bind="click: exclude,
+                  css: { disabled: !selected.codigo() }">Remover</a>
+            </div>
+
+        </div>
+
+        <div class="col-sm-7">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th>Código</th>
+                    <th>Descrição</th>
+                    <th>Parceiro</th>
+                    <th>Local</th>
+                    <th>Preço</th>
+                </tr>
+                </thead>
+                <tbody data-bind="foreach: values">
+                <tr data-bind="click: $root.edit($data)">
+                    <td data-bind="text: codigo"></td>
+                    <td data-bind="text: descricao"></td>
+                    <td data-bind="text: parceiro.nome"></td>
+                    <td data-bind="text: local"></td>
+                    <td data-bind="text: preco"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+</div>
+
+<script src="../../libs/jquery/2.1.0/js/jquery.min.js"></script>
+<script src="../../libs/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+<script src="../../libs/knockout/3.1.0/js/knockout.min.js"></script>
+<script src="../../scripts/javascript/experiencias.js"></script>
+
+</body>
+
+</html>

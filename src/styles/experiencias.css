@@ -1,0 +1,39 @@
+body {
+    padding: 0 5em;
+    font-size: 1.2em;
+}
+
+label {
+    margin-top: 0.5em;
+}
+
+h1+label,
+.panel-body > :first-child {
+    margin-top: 0;
+}
+
+.panel-group {
+    margin-top: 1em;
+    margin-bottom: 0;
+}
+
+.form-control.half-width {
+    width: 50%;
+}
+
+.form-control.half-width:not(:first-child) {
+    border-left: none;
+}
+
+.list-row > :not(:first-child) {
+    margin-top: 1em;
+}
+
+.table.table-hover tbody tr:hover {
+    cursor: pointer;
+}
+
+.btn-group {
+    margin: 1em 0 1em;
+    float: right;
+}
