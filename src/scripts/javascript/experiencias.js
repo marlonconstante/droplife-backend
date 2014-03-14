@@ -26,7 +26,7 @@ var model = {
     find: function () {
         $.ajax({
             type: "GET",
-            url: "http://localhost:5000/experiencia/pesquisa"
+            url: "/experiencia/pesquisa"
         })
             .done(function (data) {
                 data = JSON.parse(data);
@@ -42,7 +42,7 @@ var model = {
         var value = ko.toJS(model.selected);
         $.ajax({
             type: "POST",
-            url: "http://localhost:5000/experiencia/salvar/" + value.codigo,
+            url: "/experiencia/salvar/" + value.codigo,
             data: JSON.stringify(value)
         })
             .done(function () {
@@ -56,7 +56,7 @@ var model = {
         var value = ko.toJS(model.selected);
         $.ajax({
             type: "DELETE",
-            url: "http://localhost:5000/experiencia/remover/" + value.codigo
+            url: "/experiencia/remover/" + value.codigo
         })
             .done(function () {
                 model.find();
