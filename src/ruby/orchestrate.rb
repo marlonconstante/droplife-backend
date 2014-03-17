@@ -11,6 +11,8 @@ class Orchestrate
     @io.search :get do
       collection collection
       query query
+      limit 100
+      offset 0
     end.perform.to_json
   end
 
