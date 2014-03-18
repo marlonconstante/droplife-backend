@@ -2,9 +2,22 @@
 <html>
 
 <head>
-<title>Voucher Droplife</title>
+<title>Voucher de Compra</title>
 <meta content="text/html; charset=UTF-8" http-equiv="content-type">
 <style type="text/css">@import url('https://themes.googleusercontent.com/fonts/css?kit=PrdUOC1_uwv9PuICvdOGig');
+
+body {
+    padding: 9.06pt 28.13pt 9.06pt 27.14pt !important;
+}
+
+body > p:first-child {
+    height: 50px;
+}
+
+body > p:first-child > span {
+    vertical-align: top;
+    line-height: 90px;
+}
 
 ul.lst-kix_1hu4nnu3q8gr-0 {
     list-style-type: none
@@ -104,7 +117,7 @@ ol {
     padding-left: 0pt;
     padding-top: 3pt;
     margin-right: 3pt;
-    margin-left: 36pt;
+    margin-left: 26pt;
     padding-bottom: 3pt
 }
 
@@ -117,7 +130,6 @@ ol {
 .c11 {
     max-width: 439.4pt;
     background-color: #ffffff;
-    padding: 11.32pt 35.16pt 11.32pt 33.92pt
 }
 
 .c10 {
@@ -141,7 +153,7 @@ ol {
 }
 
 .c8 {
-    font-size: 15pt
+    font-size: 14pt
 }
 
 .c15 {
@@ -149,7 +161,7 @@ ol {
 }
 
 .c6 {
-    font-size: 16pt
+    font-size: 15pt
 }
 
 .c3 {
@@ -165,7 +177,7 @@ ol {
 }
 
 .c19 {
-    font-size: 12pt
+    font-size: 11pt
 }
 
 .c7 {
@@ -195,7 +207,7 @@ ol {
     orphans: 2;
     text-align: left;
     color: #000000;
-    font-size: 21pt;
+    font-size: 20pt;
     font-family: "Trebuchet MS";
     padding-bottom: 0pt;
     page-break-after: avoid
@@ -209,7 +221,7 @@ ol {
     text-align: left;
     color: #666666;
     font-style: italic;
-    font-size: 13pt;
+    font-size: 12pt;
     font-family: "Trebuchet MS";
     padding-bottom: 10pt;
     page-break-after: avoid
@@ -235,7 +247,7 @@ h1 {
     orphans: 2;
     text-align: left;
     color: #000000;
-    font-size: 16pt;
+    font-size: 15pt;
     font-family: "Trebuchet MS";
     padding-bottom: 0pt;
     page-break-after: avoid
@@ -248,7 +260,7 @@ h2 {
     orphans: 2;
     text-align: left;
     color: #000000;
-    font-size: 13pt;
+    font-size: 12pt;
     font-family: "Trebuchet MS";
     font-weight: bold;
     padding-bottom: 0pt;
@@ -262,7 +274,7 @@ h3 {
     orphans: 2;
     text-align: left;
     color: #666666;
-    font-size: 12pt;
+    font-size: 11pt;
     font-family: "Trebuchet MS";
     font-weight: bold;
     padding-bottom: 0pt;
@@ -320,40 +332,43 @@ h6 {
 <table cellpadding="0" cellspacing="0" class="c14">
     <tbody>
     <tr>
-        <td class="c20"><p class="c3 c2 c7 c10"><span class="c5 c0 c9">RAFTING AVENTURA</span></p>
+        <td class="c20"><p class="c3 c2 c7 c10"><span class="c5 c0 c9">{{EXPERIENCIA}}</span></p>
 
             <p class="c1 c7"><span class="c6 c5 c0"></span></p>
 
             <p class="c10 c3 c2"><span class="c0">Nome</span></p>
 
-            <p class="c10 c3 c2"><span class="c8 c5 c0">Patricia Tissiani</span></p>
+            <p class="c10 c3 c2"><span class="c8 c5 c0">{{CLIENTE}}</span></p>
 
             <p class="c1"><span class="c6 c5 c0"></span></p>
 
             <p class="c3 c2"><span class="c0">Estabelecimento</span></p>
 
-            <p class="c3 c2"><span class="c5 c0 c8">Ecoaventuras</span></p>
+            <p class="c3 c2"><span class="c5 c0 c8">{{PARCEIRO}}</span></p>
 
             <p class="c3 c2 c18"><span class="c5 c0 c6"></span></p>
 
             <p class="c3 c2"><span class="c0">Endere&ccedil;o</span></p>
 
-            <p class="c3 c2"><span class="c8 c5 c0">Rua Carlos Gomes, 190 - Centro - Tr&ecirc;s Coroas - RS</span></p>
+            <p class="c3 c2"><span class="c8 c5 c0">{{ENDERECO}}</span></p>
 
-            <p class="c2 c3"><span class="c0">Fone:</span><span
-                    class="c8 c5 c0">&nbsp;(51) 3546-4466 (&Eacute;drei)</span></p>
+            <p class="c3 c2 c18"><span class="c5 c0 c6"></span></p>
+
+            <p class="c3 c2"><span class="c0">Contato(s):</span></p>
+
+            <p class="c3 c2"><span class="c8 c5 c0">{{CONTATOS}}</span></p>
 
             <p class="c3 c2 c18"><span class="c8 c5 c0"></span></p>
 
-            <p class="c3 c2"><span class="c0 c19">Valor pago</span></p>
+            <p class="c3 c2"><span class="c0 c19">Valor Pago</span></p>
 
-            <p class="c3 c2"><span class="c9 c5 c0">R$ 525,00</span></p>
+            <p class="c3 c2"><span class="c9 c5 c0">{{VALOR_PAGO}}</span></p>
 
             <p class="c3 c2 c18"><span class="c9 c5 c0"></span></p>
 
             <p class="c3 c2 c7"><span class="c8 c5 c0">N&uacute;mero do Voucher</span></p>
 
-            <p class="c3 c2 c7"><span class="c8 c5 c0">862081CB-65BC-463A-A50A-170664DE2675</span></p></td>
+            <p class="c3 c2 c7"><span class="c8 c5 c0">{{NUMERO_VOUCHER}}</span></p></td>
     </tr>
     </tbody>
 </table>
@@ -373,9 +388,6 @@ h6 {
     <li class="c13 c2"><span class="c0">Esta experi&ecirc;ncia &eacute; produzida pela Ecoaventuras</span></li>
 </ul>
 <hr>
-<p class="c2 c18"><span class="c0 c5"></span></p>
-
-<p class="c2 c18"><span class="c0"></span></p>
 
 <p class="c2"><span class="c0">A equipe Droplife est&aacute; dispon&iacute;vel para qualquer d&uacute;vida nos seguintes canais:</span>
 </p>
