@@ -13,13 +13,13 @@ class Orchestrate
 
     originalResult = paginatedSearch(collection, query, limit, offset)
 
-    while (originalResult.parsed_response["total_count"] > originalResult.parsed_response["count"])
+    while (originalResult["total_count"] > originalResult["count"])
       offset += limit
 
       result = paginatedSearch(collection, query, limit, offset)
 
-      originalResult.parsed_response["results"].concat result.parsed_response["results"];
-      originalResult.parsed_response["count"] += result.parsed_response["count"]
+      originalResult["results"].concat result["results"];
+      originalResult["count"] += result["count"]
     end
 
     originalResult.to_json

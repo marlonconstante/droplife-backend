@@ -24,9 +24,14 @@ get "/voucher" do
   Voucher.new().generate();
 end
 
-get "/pagseguro/*" do |code|
+get "/pagseguro/load/*" do |code|
   protected!
   PagSeguro.new().load(code);
+end
+
+get "/pagseguro/search" do
+  protected!
+  PagSeguro.new().search();
 end
 
 get "/cadastro/*/*" do |path, file|
