@@ -22,6 +22,32 @@ var domain = {
 var model = {
     selected: domain,
     empty: ko.toJS(domain),
+    init: function() {
+        var $table = $("table");
+
+        var oTable = $table.dataTable({
+            aoColumns: [
+                { mData: "codigo" },
+                { mData: "descricao" },
+                { mData: "parceiro.nome" },
+                { mData: "local" },
+                { mData: "preco"}
+            ]
+        });
+
+        $table.find("tbody").on("click", "tr", function (event) {
+            var $tr = $(this);
+            var data = oTable.fnGetData(this);
+            if (data) {
+                if ($tr.hasClass("row-editing")) {
+                    model.update();
+                } else {
+                    model.update(data);
+                    $tr.addClass("row-editing");
+                }
+            }
+        });
+    },
     find: function () {
         $.ajax({
             type: "GET",
@@ -34,21 +60,9 @@ var model = {
                     values.push(data.results[index].value);
                 }
 
-                var $table = $("table");
-                var oTable = $table.dataTable({
-                    aaData: values,
-                    aoColumns: [
-                        { mData: "codigo" },
-                        { mData: "descricao" },
-                        { mData: "parceiro.nome" },
-                        { mData: "local" },
-                        { mData: "preco"}
-                    ]
-                });
-                $table.on("click", "tr", function (event) {
-                    model.update(oTable.fnGetData(this));
-                    $(this).addClass("row-editing");
-                });
+                var oTable = $("table").dataTable({ bRetrieve: true });
+                oTable.fnClearTable();
+                oTable.fnAddData(values);
 
                 model.clear();
             });
@@ -65,7 +79,7 @@ var model = {
             });
     },
     clear: function () {
-        model.update(model.empty);
+        model.update();
     },
     exclude: function () {
         var value = ko.toJS(model.selected);
@@ -78,6 +92,8 @@ var model = {
             });
     },
     update: function (value) {
+        value = value || model.empty;
+
         var oTable = $("table").dataTable({ bRetrieve: true });
         oTable.$("tr.row-editing").removeClass("row-editing");
 
@@ -112,5 +128,6 @@ var model = {
     }
 };
 
+model.init();
 model.find();
 ko.applyBindings(model);

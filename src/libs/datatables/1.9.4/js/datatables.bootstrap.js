@@ -5,6 +5,7 @@ $.extend(true, $.fn.dataTable.defaults, {
     oLanguage: {
         sProcessing: "Processando...",
         sLengthMenu: "Itens por página _MENU_",
+        sEmptyTable: "Sem informação",
         sZeroRecords: "Sem informação",
         sInfo: "Mostrando de _START_ até _END_. Total de _TOTAL_ registro(s) encontrado(s)",
         sInfoEmpty: "Nenhum registro encontrado",
