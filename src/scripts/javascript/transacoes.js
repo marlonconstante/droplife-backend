@@ -1,13 +1,19 @@
 var model = {
     init: function () {
+        moment.lang("pt-BR");
+
+        accounting.settings.currency.symbol = "R$ ";
+        accounting.settings.currency.decimal = ",";
+        accounting.settings.currency.thousand = ".";
+
         var $table = $("table");
 
         var oTable = $table.dataTable({
             aoColumns: [
-                { mData: "date" },
+                { mData: "date", mRender: model.renderDate },
                 { mData: "paymentMethod.type", mRender: model.renderPaymentMethod },
                 { mData: "status", mRender: model.renderStatus },
-                { mData: "grossAmount" },
+                { mData: "grossAmount", mRender: model.renderMoney},
                 { mData: "code" }
             ]
         });
@@ -36,6 +42,30 @@ var model = {
     report: function (value) {
         console.log(value);
     },
+    renderDate: function(date) {
+        return moment(date).format("LLLL");
+    },
+    renderMoney: function(money) {
+        return accounting.formatMoney(money);
+    },
+    renderPaymentMethod: function (paymentMethod) {
+        switch (Number(paymentMethod)) {
+            case 1:
+                return "Cartão de crédito";
+            case 2:
+                return "Boleto";
+            case 3:
+                return "Débito online (TEF)";
+            case 4:
+                return "Saldo PagSeguro";
+            case 5:
+                return "Oi Paggo";
+            case 7:
+                return "Depósito em conta";
+            default:
+                return "Indefinido";
+        }
+    },
     renderStatus: function (status) {
         switch (Number(status)) {
             case 1:
@@ -52,24 +82,6 @@ var model = {
                 return "Devolvida";
             case 7:
                 return "Cancelada";
-            default:
-                return "Indefinido";
-        }
-    },
-    renderPaymentMethod: function (paymentMethod) {
-        switch (Number(paymentMethod)) {
-            case 1:
-                return "Cartão de crédito";
-            case 2:
-                return "Boleto";
-            case 3:
-                return "Débito online (TEF)";
-            case 4:
-                return "Saldo PagSeguro";
-            case 5:
-                return "Oi Paggo";
-            case 7:
-                return "Depósito em conta";
             default:
                 return "Indefinido";
         }
