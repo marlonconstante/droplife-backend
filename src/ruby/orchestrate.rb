@@ -8,12 +8,30 @@ class Orchestrate
   end
 
   def search(collection, query)
+    limit = 100
+    offset = 0
+
+    originalResult = paginatedSearch(collection, query, limit, offset)
+
+    while (originalResult.parsed_response["total_count"] > originalResult.parsed_response["count"])
+      offset += limit
+
+      result = paginatedSearch(collection, query, limit, offset)
+
+      originalResult.parsed_response["results"].concat result.parsed_response["results"];
+      originalResult.parsed_response["count"] += result.parsed_response["count"]
+    end
+
+    originalResult.to_json
+  end
+
+  def paginatedSearch(collection, query, limit, offset)
     @io.search :get do
       collection collection
       query query
-      limit 100
-      offset 0
-    end.perform.to_json
+      limit limit
+      offset offset
+    end.perform
   end
 
   def save(collection, key, data)

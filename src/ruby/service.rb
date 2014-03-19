@@ -6,7 +6,7 @@ require_relative "pag_seguro"
 
 get "/experiencia/pesquisa" do
   protected!
-  Orchestrate.new().search("Experiencia", nil)
+  Orchestrate.new().search("Experiencia", "*")
 end
 
 post "/experiencia/salvar/*" do |key|
