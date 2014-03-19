@@ -22,7 +22,7 @@ var domain = {
 var model = {
     selected: domain,
     empty: ko.toJS(domain),
-    init: function() {
+    init: function () {
         var $table = $("table");
 
         var oTable = $table.dataTable({
@@ -31,7 +31,7 @@ var model = {
                 { mData: "descricao" },
                 { mData: "parceiro.nome" },
                 { mData: "local" },
-                { mData: "preco"}
+                { mData: "preco" }
             ]
         });
 

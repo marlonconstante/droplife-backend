@@ -12,6 +12,10 @@ h1+label,
     margin-top: 0;
 }
 
+h1, h2, h3, h4, h5, h6 {
+    margin: 10px 0 10px;
+}
+
 @media (max-width: 767px) {
     .logo {
         text-align: center;
@@ -25,7 +29,7 @@ h1+label,
 @media (min-width: 768px) {
     .logo {
         float: right;
-        margin-top: 1.7em;
+        margin-top: 0.7em;
     }
 
     .logo img {
