@@ -22,7 +22,6 @@ var domain = {
 var model = {
     selected: domain,
     empty: ko.toJS(domain),
-    values: ko.observableArray([]),
     find: function () {
         $.ajax({
             type: "GET",
@@ -30,11 +29,27 @@ var model = {
         })
             .done(function (data) {
                 data = JSON.parse(data);
-                var array = [];
+                var values = [];
                 for (var index = 0; index < data.count; index++) {
-                    array.push(data.results[index].value);
+                    values.push(data.results[index].value);
                 }
-                model.values(array);
+
+                var $table = $("table");
+                var oTable = $table.dataTable({
+                    aaData: values,
+                    aoColumns: [
+                        { mData: "codigo" },
+                        { mData: "descricao" },
+                        { mData: "parceiro.nome" },
+                        { mData: "local" },
+                        { mData: "preco"}
+                    ]
+                });
+                $table.on("click", "tr", function (event) {
+                    model.update(oTable.fnGetData(this));
+                    $(this).addClass("row-editing");
+                });
+
                 model.clear();
             });
     },
@@ -62,12 +77,10 @@ var model = {
                 model.find();
             });
     },
-    edit: function (value) {
-        return function () {
-            model.update(value);
-        }
-    },
     update: function (value) {
+        var oTable = $("table").dataTable({ bRetrieve: true });
+        oTable.$("tr.row-editing").removeClass("row-editing");
+
         model.selected.codigo(value.codigo);
         model.selected.descricao(value.descricao);
         model.selected.local(value.local);

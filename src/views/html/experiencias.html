@@ -9,6 +9,7 @@
 
     <link href="../../libs/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
     <link href="../../styles/experiencias.css" rel="stylesheet">
+    <link href="../../styles/datatables.css" rel="stylesheet">
 </head>
 <body>
 
@@ -126,26 +127,16 @@
         </div>
 
         <div class="col-sm-7">
-            <table class="table table-hover">
+            <table class="table table-hover table-striped table-bordered">
                 <thead>
                 <tr>
-                    <th>Código</th>
-                    <th>Descrição</th>
-                    <th>Parceiro</th>
-                    <th>Local</th>
-                    <th>Preço</th>
+                    <th width="20%">Código</th>
+                    <th width="20%">Descrição</th>
+                    <th width="20%">Parceiro</th>
+                    <th width="20%">Local</th>
+                    <th width="20%">Preço</th>
                 </tr>
                 </thead>
-                <tbody data-bind="foreach: values">
-                <tr data-bind="click: $root.edit($data),
-                  css: { 'row-editing': $root.selected.codigo() == $data.codigo }">
-                    <td data-bind="text: codigo"></td>
-                    <td data-bind="text: descricao"></td>
-                    <td data-bind="text: parceiro.nome"></td>
-                    <td data-bind="text: local"></td>
-                    <td data-bind="text: preco"></td>
-                </tr>
-                </tbody>
             </table>
         </div>
     </div>
@@ -156,6 +147,8 @@
 <script src="../../libs/jquery/2.1.0/js/jquery.min.js"></script>
 <script src="../../libs/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 <script src="../../libs/knockout/3.1.0/js/knockout.min.js"></script>
+<script src="../../libs/datatables/1.9.4/js/datatables.min.js"></script>
+<script src="../../libs/datatables/1.9.4/js/datatables.bootstrap.js"></script>
 <script src="../../scripts/javascript/experiencias.js"></script>
 
 </body>

@@ -1,0 +1,56 @@
+.table {
+    table-layout: fixed;
+    width: 100%;
+    border-collapse: collapse;
+    margin: 5px 0 10px;
+}
+
+.table td {
+    padding: 0.5em;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+.table thead tr th,
+.table.table-hover tbody tr:hover {
+    cursor: pointer;
+}
+
+.table.table-hover tbody tr.row-editing td {
+    background-color: #ececec;
+}
+
+.dataTables_wrapper {
+    display: inline-block;
+}
+
+.dataTables_length,
+.dataTables_filter {
+    display: inline;
+}
+
+.dataTables_length {
+    text-align: right;
+}
+
+.dataTables_length select {
+    width: 60px;
+}
+
+.dataTables_length,
+.dataTables_length select,
+.dataTables_info,
+.dataTables_paginate {
+    float: right;
+}
+
+.dataTables_length select.form-control,
+.dataTables_filter input.form-control {
+    margin-top: 5px;
+    display: block;
+}
+
+.dataTables_info,
+.dataTables_paginate .pagination {
+    margin: 0 0 5px;
+}
