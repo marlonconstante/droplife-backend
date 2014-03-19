@@ -7,6 +7,7 @@ gem "orchestrate.io", :git => "https://github.com/marlonconstante/ruby-orchestra
 gem "pdfkit"
 gem "wkhtmltopdf-binary"
 gem "launchy"
+gem "activesupport"
 gem "thin"
 
 # gem "rails"

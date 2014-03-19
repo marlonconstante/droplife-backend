@@ -1,7 +1,8 @@
 require "sinatra"
-require "./src/ruby/security"
-require "./src/ruby/orchestrate"
-require "./src/ruby/voucher"
+require_relative "security"
+require_relative "orchestrate"
+require_relative "voucher"
+require_relative "pag_seguro"
 
 get "/experiencia/pesquisa" do
   protected!
@@ -21,6 +22,11 @@ end
 get "/voucher" do
   protected!
   Voucher.new().generate();
+end
+
+get "/pagseguro/*" do |code|
+  protected!
+  PagSeguro.new().load(code);
 end
 
 get "/cadastro/*/*" do |path, file|
