@@ -30,7 +30,12 @@ class PagSeguro
       xml = requestXml(url)
 
       if xml["transactionSearchResult"]["transactions"]
-        transactions.concat xml["transactionSearchResult"]["transactions"]["transaction"]
+        xmlTransactions = xml["transactionSearchResult"]["transactions"]["transaction"]
+        if xmlTransactions.kind_of?(Array)
+          transactions.concat xmlTransactions
+        else
+          transactions << xmlTransactions
+        end
       end
     end
 
