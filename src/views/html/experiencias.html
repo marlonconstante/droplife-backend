@@ -22,6 +22,9 @@
 
     <div class="row">
         <div class="col-sm-5">
+            <label>Identificador</label>
+            <input type="text" class="form-control" data-bind="value: selected.identificador">
+
             <label>Código</label>
             <input type="text" class="form-control" data-bind="value: selected.codigo">
 
@@ -116,12 +119,12 @@
             <div class="btn-group">
                 <a class="btn btn-primary" role="button"
                    data-bind="click: save,
-                  css: { 'disabled': !selected.codigo() }">Salvar</a>
+                  css: { 'disabled': !selected.identificador() }">Salvar</a>
                 <a class="btn btn-default" role="button"
                    data-bind="click: clear">Limpar</a>
                 <a class="btn btn-danger" role="button"
                    data-bind="click: exclude,
-                  css: { 'disabled': !selected.codigo() }">Remover</a>
+                  css: { 'disabled': !selected.identificador() }">Remover</a>
             </div>
 
         </div>
@@ -130,7 +133,7 @@
             <table class="table table-hover table-striped table-bordered">
                 <thead>
                 <tr>
-                    <th width="20%">Código</th>
+                    <th width="20%">Identificador</th>
                     <th width="20%">Descrição</th>
                     <th width="20%">Parceiro</th>
                     <th width="20%">Local</th>

@@ -1,4 +1,5 @@
 var domain = {
+    identificador: ko.observable(""),
     codigo: ko.observable(""),
     descricao: ko.observable(""),
     local: ko.observable(""),
@@ -27,7 +28,7 @@ var model = {
 
         var oTable = $table.dataTable({
             aoColumns: [
-                { mData: "codigo" },
+                { mData: "identificador" },
                 { mData: "descricao" },
                 { mData: "parceiro.nome" },
                 { mData: "local" },
@@ -75,7 +76,7 @@ var model = {
         var value = ko.toJS(model.selected);
         $.ajax({
             type: "POST",
-            url: "/experiencia/salvar/" + value.codigo,
+            url: "/experiencia/salvar/" + value.identificador,
             data: JSON.stringify(value)
         })
             .done(function () {
@@ -89,7 +90,7 @@ var model = {
         var value = ko.toJS(model.selected);
         $.ajax({
             type: "DELETE",
-            url: "/experiencia/remover/" + value.codigo
+            url: "/experiencia/remover/" + value.identificador
         })
             .done(function () {
                 model.find();
@@ -101,6 +102,7 @@ var model = {
         var oTable = $("table").dataTable({ bRetrieve: true });
         oTable.$("tr.row-editing").removeClass("row-editing");
 
+        model.selected.identificador(value.identificador);
         model.selected.codigo(value.codigo);
         model.selected.descricao(value.descricao);
         model.selected.local(value.local);
