@@ -57,4 +57,5 @@ DEPENDENCIES
   pdfkit
   sinatra (~> 1.4.4)
   thin
+  thread_safe (~> 0.3.0)
   wkhtmltopdf-binary
