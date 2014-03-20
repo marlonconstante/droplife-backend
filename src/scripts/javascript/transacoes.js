@@ -83,6 +83,10 @@ var model = {
                 }
             }
         });
+
+        $(window).on("resize", function () {
+            oTable.fnAdjustColumnSizing();
+        });
     },
     find: function () {
         $.ajax({
@@ -115,6 +119,8 @@ var model = {
         model.selected.data(model.renderDate(value.date));
         model.selected.linkPagamento(value.paymentLink);
         model.selected.codigo(value.code);
+
+        oTable.fnAdjustColumnSizing();
     },
     generateVoucher: function (value) {
         console.log(value);
@@ -123,7 +129,7 @@ var model = {
             url: "/voucher/generate"
         });
     },
-    getPhoneNumber: function(phone) {
+    getPhoneNumber: function (phone) {
         var phoneNumber = "";
         if (phone && phone.number) {
             if (phone.areaCode) {

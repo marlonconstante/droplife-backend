@@ -47,6 +47,10 @@ var model = {
                 }
             }
         });
+
+        $(window).on("resize", function () {
+            oTable.fnAdjustColumnSizing();
+        });
     },
     find: function () {
         $.ajax({

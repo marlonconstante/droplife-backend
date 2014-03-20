@@ -1,6 +1,5 @@
 .table {
-    table-layout: fixed;
-    width: 100%;
+    width: 100% !important;
     border-collapse: collapse;
     margin: 5px 0 10px;
 }
@@ -21,6 +20,7 @@
 }
 
 .dataTables_wrapper {
+    width: 100%;
     display: inline-block;
 }
 
