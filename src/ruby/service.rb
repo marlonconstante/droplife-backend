@@ -19,9 +19,9 @@ delete "/experiencia/remover/*" do |key|
   Orchestrate.new().delete("Experiencia", key)
 end
 
-get "/voucher/generate" do
+post "/voucher/generate" do
   protected!
-  Voucher.new().generate();
+  Voucher.new().generate(request.body.read);
 end
 
 get "/pagseguro/load/*" do |code|

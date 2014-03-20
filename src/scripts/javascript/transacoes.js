@@ -122,11 +122,12 @@ var model = {
 
         oTable.fnAdjustColumnSizing();
     },
-    generateVoucher: function (value) {
-        console.log(value);
+    generateVoucher: function () {
+        var value = ko.toJS(model.selected);
         $.ajax({
-            type: "GET",
-            url: "/voucher/generate"
+            type: "POST",
+            url: "/voucher/generate",
+            data: JSON.stringify(value)
         });
     },
     getPhoneNumber: function (phone) {

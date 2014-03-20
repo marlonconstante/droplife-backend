@@ -47,6 +47,7 @@ PLATFORMS
 
 DEPENDENCIES
   activesupport (~> 3.2.9)
+  json
   launchy
   orchestrate.io!
   pdfkit
