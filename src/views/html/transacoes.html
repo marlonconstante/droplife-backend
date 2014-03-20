@@ -18,28 +18,53 @@
         <img src="../../images/logo.png"/>
     </div>
 
-    <h1>Transações Financeiras</h1>
+    <h1>Transação Financeira</h1>
 
     <div class="row">
-        <div class="col-sm-5">
-            <div class="jumbotron">
-                <div data-bind="text: selected.experiencia.descricao"></div>
-                <div data-bind="text: selected.cliente.nome"></div>
-                <div data-bind="text: selected.cliente.email"></div>
-                <div data-bind="text: selected.cliente.telefone"></div>
-                <div data-bind="text: selected.metodoPagamento"></div>
-                <div data-bind="text: selected.valor"></div>
-                <div data-bind="text: selected.valorTaxa"></div>
-                <div data-bind="text: selected.valorLiquido"></div>
-                <div data-bind="text: selected.situacao"></div>
-                <div data-bind="text: selected.data"></div>
-                <a target="_blank" data-bind="text: selected.linkPagamento, attr: { href: selected.linkPagamento }"></a>
-                <div data-bind="text: selected.codigo"></div>
+        <div class="col-sm-5" data-bind="visible: selected.codigo()">
+            <div class="jumbotron panel-info">
+                <h4 data-bind="text: selected.experiencia.descricao"></h4>
 
-                <a class="btn btn-primary btn-lg" role="button">Gerar Voucher</a>
+                <label>Nome</label>
+                <div data-bind="text: selected.cliente.nome"></div>
+
+                <label>E-mail</label>
+                <div data-bind="text: selected.cliente.email"></div>
+
+                <label>Telefone</label>
+                <div data-bind="text: selected.cliente.telefone"></div>
+
+                <label>Método de Pagamento</label>
+                <div data-bind="text: selected.metodoPagamento"></div>
+
+                <label>Valor Total</label>
+                <div data-bind="text: selected.valorTotal"></div>
+
+                <label>Valor da Taxa</label>
+                <div data-bind="text: selected.valorTaxa"></div>
+
+                <label>Valor Líquido</label>
+                <div data-bind="text: selected.valorLiquido"></div>
+
+                <label>Situação</label>
+                <div data-bind="text: selected.situacao"></div>
+
+                <label>Data</label>
+                <div data-bind="text: selected.data"></div>
+
+                <div data-bind="visible: selected.linkPagamento()">
+                    <label>Link do Pagamento</label>
+                    <a target="_blank" data-bind="text: selected.linkPagamento, attr: { href: selected.linkPagamento }"></a>
+                </div>
+
+                <div class="well" data-bind="text: selected.codigo"></div>
+
+                <a class="btn btn-primary btn-lg"
+                   role="button"
+                   data-bind="click: generateVoucher">Gerar Voucher</a>
             </div>
         </div>
-        <div class="col-sm-7">
+        <div data-bind="attr: { class: selected.codigo() ? 'col-sm-7' : 'col-sm-12' }">
             <table class="table table-hover table-striped table-bordered">
                 <thead>
                 <tr>

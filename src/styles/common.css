@@ -2,6 +2,7 @@ body {
     padding: 0 2em;
     font-size: 1.2em;
 }
+
 a {
     cursor: pointer;
 }
@@ -10,13 +11,19 @@ label {
     margin-top: 0.5em;
 }
 
+.panel-info label {
+    margin: 0.3em 0 0;
+}
+
 h1+label,
+.panel-info > h4+label,
+.panel-info > :first-child,
 .panel-body > :first-child {
     margin-top: 0;
 }
 
 h1, h2, h3, h4, h5, h6 {
-    margin: 10px 0 10px;
+    margin: 0.5em 0 0.5em;
 }
 
 @media (max-width: 767px) {
@@ -40,15 +47,26 @@ h1, h2, h3, h4, h5, h6 {
     }
 }
 
-.jumbotron {
-    padding: 20px !important;
+.panel-info {
+    margin-top: 0.5em;
+    padding: 1em;
     word-wrap: break-word;
     overflow-wrap: break-word;
+}
+
+.panel-info .btn {
+    margin-top: 0.25em;
 }
 
 .panel-group {
     margin-top: 1em;
     margin-bottom: 0;
+}
+
+.well {
+    min-height: 0.5em;
+    padding: 0.5em;
+    margin: 0.5em 0 0.5em;
 }
 
 .form-control.half-width {

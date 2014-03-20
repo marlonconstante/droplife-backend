@@ -19,7 +19,7 @@ delete "/experiencia/remover/*" do |key|
   Orchestrate.new().delete("Experiencia", key)
 end
 
-get "/voucher" do
+get "/voucher/generate" do
   protected!
   Voucher.new().generate();
 end

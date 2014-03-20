@@ -8,7 +8,7 @@ var domain = {
         telefone: ko.observable("")
     },
     metodoPagamento: ko.observable(""),
-    valor: ko.observable(""),
+    valorTotal: ko.observable(""),
     valorTaxa: ko.observable(""),
     valorLiquido: ko.observable(""),
     situacao: ko.observable(""),
@@ -108,7 +108,7 @@ var model = {
         model.selected.cliente.email(value.sender.email);
         model.selected.cliente.telefone(model.getPhoneNumber(value.sender.phone));
         model.selected.metodoPagamento(model.renderPaymentMethod(value.paymentMethod.type));
-        model.selected.valor(model.renderMoney(value.grossAmount));
+        model.selected.valorTotal(model.renderMoney(value.grossAmount));
         model.selected.valorTaxa(model.renderMoney(value.feeAmount));
         model.selected.valorLiquido(model.renderMoney(value.netAmount));
         model.selected.situacao(model.renderStatus(value.status));
@@ -116,8 +116,12 @@ var model = {
         model.selected.linkPagamento(value.paymentLink);
         model.selected.codigo(value.code);
     },
-    report: function (value) {
+    generateVoucher: function (value) {
         console.log(value);
+        $.ajax({
+            type: "GET",
+            url: "/voucher/generate"
+        });
     },
     getPhoneNumber: function(phone) {
         var phoneNumber = "";
