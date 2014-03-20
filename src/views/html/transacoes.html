@@ -21,7 +21,25 @@
     <h1>Transações Financeiras</h1>
 
     <div class="row">
-        <div class="col-sm-12">
+        <div class="col-sm-5">
+            <div class="jumbotron">
+                <div data-bind="text: selected.experiencia.descricao"></div>
+                <div data-bind="text: selected.cliente.nome"></div>
+                <div data-bind="text: selected.cliente.email"></div>
+                <div data-bind="text: selected.cliente.telefone"></div>
+                <div data-bind="text: selected.metodoPagamento"></div>
+                <div data-bind="text: selected.valor"></div>
+                <div data-bind="text: selected.valorTaxa"></div>
+                <div data-bind="text: selected.valorLiquido"></div>
+                <div data-bind="text: selected.situacao"></div>
+                <div data-bind="text: selected.data"></div>
+                <a target="_blank" data-bind="text: selected.linkPagamento, attr: { href: selected.linkPagamento }"></a>
+                <div data-bind="text: selected.codigo"></div>
+
+                <a class="btn btn-primary btn-lg" role="button">Gerar Voucher</a>
+            </div>
+        </div>
+        <div class="col-sm-7">
             <table class="table table-hover table-striped table-bordered">
                 <thead>
                 <tr>

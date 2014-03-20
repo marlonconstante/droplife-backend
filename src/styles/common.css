@@ -2,6 +2,9 @@ body {
     padding: 0 2em;
     font-size: 1.2em;
 }
+a {
+    cursor: pointer;
+}
 
 label {
     margin-top: 0.5em;
@@ -35,6 +38,12 @@ h1, h2, h3, h4, h5, h6 {
     .logo img {
         width: 10.1em;
     }
+}
+
+.jumbotron {
+    padding: 20px !important;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 
 .panel-group {

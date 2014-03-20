@@ -7,7 +7,7 @@ class PagSeguro
 
   def load(code)
     url = "#{URL}/#{code}?email=#{API_EMAIL}&token=#{API_TOKEN}"
-    requestXml(url).to_json
+    requestXml(url)["transaction"].to_json
   end
 
   def search
