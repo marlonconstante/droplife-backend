@@ -18,7 +18,7 @@
         <img src="../../images/logo.png"/>
     </div>
 
-    <h1>Transação Financeira</h1>
+    <h2>Consulta das Transações Financeiras</h2>
 
     <div class="row">
         <div class="col-sm-5" data-bind="visible: selected.codigo()">
@@ -29,10 +29,10 @@
                 <div data-bind="text: selected.cliente.nome"></div>
 
                 <label>E-mail</label>
-                <div data-bind="text: selected.cliente.email"></div>
+                <a data-bind="text: selected.cliente.email, attr: { href: 'mailto:' + selected.cliente.email() }"></a>
 
                 <label>Telefone</label>
-                <div data-bind="text: selected.cliente.telefone"></div>
+                <a data-bind="text: selected.cliente.telefone, attr: { href: 'tel:' + selected.cliente.telefone().replace(/\D/g, '') }"></a>
 
                 <label>Método de Pagamento</label>
                 <div data-bind="text: selected.metodoPagamento"></div>
@@ -53,7 +53,7 @@
                 <div data-bind="text: selected.data"></div>
 
                 <div data-bind="visible: selected.linkPagamento()">
-                    <label>Link do Pagamento</label>
+                    <label>Link de Pagamento</label>
                     <a target="_blank" data-bind="text: selected.linkPagamento, attr: { href: selected.linkPagamento }"></a>
                 </div>
 

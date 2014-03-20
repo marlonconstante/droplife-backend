@@ -48,10 +48,14 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .panel-info {
-    margin-top: 0.5em;
+    margin-top: 0.8em;
     padding: 1em;
     word-wrap: break-word;
     overflow-wrap: break-word;
+}
+
+.panel-info a {
+    display: block;
 }
 
 .panel-info .btn {
