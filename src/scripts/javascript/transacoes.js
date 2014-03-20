@@ -10,10 +10,10 @@ var model = {
 
         var oTable = $table.dataTable({
             aoColumns: [
-                { mData: "date", mRender: model.renderDate },
+                { mData: "date", sType: "moment", mRender: model.renderDate },
                 { mData: "paymentMethod.type", mRender: model.renderPaymentMethod },
                 { mData: "status", mRender: model.renderStatus },
-                { mData: "grossAmount", mRender: model.renderMoney},
+                { mData: "grossAmount", sType: "accounting", mRender: model.renderMoney},
                 { mData: "code" }
             ]
         });

@@ -47,6 +47,30 @@ $.fn.dataTableExt.oApi.fnPagingInfo = function (oSettings) {
     };
 };
 
+$.extend($.fn.dataTableExt.oSort, {
+    "moment-pre": function (column) {
+        return moment(column, "LLLL");
+    },
+    "moment-asc": function (a, b) {
+        return ((a < b) ? -1 : ((a > b) ? 1 : 0));
+    },
+    "moment-desc": function (a, b) {
+        return ((a < b) ? 1 : ((a > b) ? -1 : 0));
+    }
+});
+
+$.extend($.fn.dataTableExt.oSort, {
+    "accounting-pre": function (column) {
+        return accounting.unformat(column);
+    },
+    "accounting-asc": function (a, b) {
+        return ((a < b) ? -1 : ((a > b) ? 1 : 0));
+    },
+    "accounting-desc": function (a, b) {
+        return ((a < b) ? 1 : ((a > b) ? -1 : 0));
+    }
+});
+
 /* Bootstrap style pagination control */
 $.extend($.fn.dataTableExt.oPagination, {
     "bootstrap": {
