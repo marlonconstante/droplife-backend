@@ -34,9 +34,6 @@
             <label>Local</label>
             <input type="text" class="form-control" data-bind="value: selected.local">
 
-            <label>Preço</label>
-            <input type="text" class="form-control" data-bind="value: selected.preco">
-
             <div id="parceiroPanel" class="panel-group">
                 <div class="panel panel-default">
                     <div class="panel-heading">
@@ -51,6 +48,9 @@
                         <div class="panel-body">
                             <label>Nome</label>
                             <input type="text" class="form-control" data-bind="value: selected.parceiro.nome">
+
+                            <label>Valor</label>
+                            <input type="text" class="form-control" data-bind="value: selected.parceiro.valor">
 
                             <label>Contatos</label>
 
@@ -134,10 +134,9 @@
                 <thead>
                 <tr>
                     <th width="20%">Identificador</th>
-                    <th width="20%">Descrição</th>
+                    <th width="30%">Descrição</th>
                     <th width="20%">Parceiro</th>
-                    <th width="20%">Local</th>
-                    <th width="20%">Preço</th>
+                    <th width="30%">Local</th>
                 </tr>
                 </thead>
             </table>

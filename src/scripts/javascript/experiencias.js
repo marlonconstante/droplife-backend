@@ -3,9 +3,9 @@ var domain = {
     codigo: ko.observable(""),
     descricao: ko.observable(""),
     local: ko.observable(""),
-    preco: ko.observable(""),
     parceiro: {
         nome: ko.observable(""),
+        valor: ko.observable(""),
         contatos: ko.observableArray([
             {
                 nome: ko.observable(""),
@@ -31,8 +31,7 @@ var model = {
                 { mData: "identificador" },
                 { mData: "descricao" },
                 { mData: "parceiro.nome" },
-                { mData: "local" },
-                { mData: "preco" }
+                { mData: "local" }
             ]
         });
 
@@ -112,8 +111,8 @@ var model = {
         model.selected.codigo(value.codigo);
         model.selected.descricao(value.descricao);
         model.selected.local(value.local);
-        model.selected.preco(value.preco);
         model.selected.parceiro.nome(value.parceiro.nome);
+        model.selected.parceiro.valor(value.parceiro.valor);
         model.selected.parceiro.contatos(model.convertArray(value.parceiro.contatos));
         model.selected.termos(model.convertArray(value.termos));
     },
