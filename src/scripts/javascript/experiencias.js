@@ -70,6 +70,12 @@ var model = {
                 oTable.fnAddData(values);
 
                 model.clear();
+
+                var id = $.urlParam("id");
+                if (id) {
+                    oTable.fnFilter("^" + id + "$", 0, true);
+                    oTable.$("tr").trigger("click");
+                }
             });
     },
     save: function () {
