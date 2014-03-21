@@ -7,6 +7,13 @@ class Orchestrate
     @io = OrchestrateIo.new(:api_key => API_KEY)
   end
 
+  def load(collection, key)
+    @io.key_value :get do
+      collection collection
+      key key
+    end.perform.to_json
+  end
+
   def search(collection, query)
     limit = 100
     offset = 0

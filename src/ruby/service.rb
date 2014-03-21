@@ -4,6 +4,11 @@ require_relative "orchestrate"
 require_relative "voucher"
 require_relative "pag_seguro"
 
+get "/experiencia/carregar/*" do |key|
+  protected!
+  Orchestrate.new().load("Experiencia", key)
+end
+
 get "/experiencia/pesquisa" do
   protected!
   Orchestrate.new().search("Experiencia", "*")
