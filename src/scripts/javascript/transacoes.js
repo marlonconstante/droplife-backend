@@ -164,7 +164,11 @@ var model = {
                     partnerContacts += contacts[index].nome;
                     partnerContacts += " - ";
                 }
+                partnerContacts += "<a href='tel:";
+                partnerContacts += contacts[index].telefone.replace(/\D/g, "");
+                partnerContacts += "'>";
                 partnerContacts += contacts[index].telefone;
+                partnerContacts += "</a>";
             }
         }
         return partnerContacts;
