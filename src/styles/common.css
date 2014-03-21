@@ -16,6 +16,7 @@ label {
 }
 
 h1+label,
+.panel-info > h4,
 .panel-info > h4+label,
 .panel-info > :first-child,
 .panel-body > :first-child {
@@ -54,12 +55,19 @@ h1, h2, h3, h4, h5, h6 {
     overflow-wrap: break-word;
 }
 
-.panel-info a {
-    display: block;
+.panel-info hr {
+    margin-top: 0.25em;
+    margin-bottom: 0.25em;
+    border: 0;
+    border-top: 1px solid #ddd;
 }
 
 .panel-info .btn {
     margin-top: 0.25em;
+}
+
+.panel-info .btn-edit {
+    float: right;
 }
 
 .panel-group {

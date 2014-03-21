@@ -23,38 +23,106 @@
     <div class="row">
         <div style="display: none;" class="col-sm-5" data-bind="visible: selected.codigo()">
             <div class="jumbotron panel-info">
+                <a target="_blank"
+                   class="btn btn-default btn-edit"
+                   role="button"
+                   data-bind="attr: { href: 'experiencias.html?id=' + selected.experiencia.identificador() }">
+                    <i class="glyphicon glyphicon-pencil"></i>
+                </a>
+
                 <h4 data-bind="text: selected.experiencia.descricao"></h4>
 
-                <label>Nome</label>
+                <label>Cliente</label>
+
                 <div data-bind="text: selected.cliente.nome"></div>
 
-                <label>E-mail</label>
-                <a data-bind="text: selected.cliente.email, attr: { href: 'mailto:' + selected.cliente.email() }"></a>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <label>E-mail</label>
 
-                <label>Telefone</label>
-                <a data-bind="text: selected.cliente.telefone, attr: { href: 'tel:' + selected.cliente.telefone().replace(/\D/g, '') }"></a>
+                        <div>
+                            <a data-bind="text: selected.cliente.email, attr: { href: 'mailto:' + selected.cliente.email() }"></a>
+                        </div>
+                    </div>
 
-                <label>Método de Pagamento</label>
-                <div data-bind="text: selected.metodoPagamento"></div>
+                    <div class="col-sm-6">
+                        <label>Telefone</label>
 
-                <label>Valor Total</label>
-                <div data-bind="text: selected.valorTotal"></div>
+                        <div>
+                            <a data-bind="text: selected.cliente.telefone, attr: { href: 'tel:' + selected.cliente.telefone().replace(/\D/g, '') }"></a>
+                        </div>
+                    </div>
+                </div>
 
-                <label>Valor da Taxa</label>
-                <div data-bind="text: selected.valorTaxa"></div>
+                <hr>
 
-                <label>Valor Líquido</label>
-                <div data-bind="text: selected.valorLiquido"></div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <label>Parceiro</label>
 
-                <label>Situação</label>
-                <div data-bind="text: selected.situacao"></div>
+                        <div data-bind="text: selected.experiencia.parceiro.nome"></div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <label>Contatos</label>
+
+                        <div data-bind="html: selected.experiencia.parceiro.contatos"></div>
+                    </div>
+                </div>
+
+                <hr>
+
+                <div class="row">
+                    <div class="col-sm-6">
+                        <label>Método de Pagamento</label>
+
+                        <div data-bind="text: selected.metodoPagamento"></div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <label>Situação</label>
+
+                        <div data-bind="text: selected.situacao"></div>
+                    </div>
+                </div>
+
+                <hr>
+
+                <div class="row">
+                    <div class="col-sm-4">
+                        <label>Valor Total</label>
+
+                        <div data-bind="text: selected.valorTotal"></div>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <label>Valor da Taxa</label>
+
+                        <div data-bind="text: selected.valorTaxa"></div>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <label>Valor Líquido</label>
+
+                        <div data-bind="text: selected.valorLiquido"></div>
+                    </div>
+                </div>
+
+                <hr>
 
                 <label>Data</label>
+
                 <div data-bind="text: selected.data"></div>
+
+                <hr>
 
                 <div data-bind="visible: selected.linkPagamento()">
                     <label>Link de Pagamento</label>
-                    <a target="_blank" data-bind="text: selected.linkPagamento, attr: { href: selected.linkPagamento }"></a>
+
+                    <div>
+                        <a target="_blank"
+                           data-bind="text: selected.linkPagamento, attr: { href: selected.linkPagamento }"></a>
+                    </div>
                 </div>
 
                 <div class="well" data-bind="text: selected.codigo"></div>
