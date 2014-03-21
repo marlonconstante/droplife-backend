@@ -24,7 +24,7 @@ var domain = {
     codigo: ko.observable("")
 };
 
-var empty = {
+var emptyTransaction = {
     items: {
         item: {
             description: ""
@@ -52,7 +52,8 @@ var empty = {
 
 var model = {
     selected: domain,
-    empty: empty,
+    emptyExperience: ko.toJS(domain.experiencia),
+    emptyTransaction: emptyTransaction,
     init: function () {
         moment.lang("pt-BR");
 
@@ -90,7 +91,11 @@ var model = {
                                 url: "/experiencia/carregar/" + transaction.items.item.id
                             })
                                 .done(function (experience) {
-                                    transaction.experience = JSON.parse(experience);
+                                    experience = JSON.parse(experience);
+                                    if (experience.message) {
+                                        experience = model.emptyExperience;
+                                    }
+                                    transaction.experience = experience;
                                     model.update(transaction);
                                     $tr.addClass("row-editing");
                                 });
@@ -117,15 +122,15 @@ var model = {
             });
     },
     update: function (value) {
-        value = value || model.empty;
+        value = value || model.emptyTransaction;
 
         var oTable = $("table").dataTable({ bRetrieve: true });
         oTable.$("tr.row-editing").removeClass("row-editing");
 
         model.selected.experiencia.identificador(value.experience.identificador);
-        model.selected.experiencia.descricao(value.experience.descricao);
-        model.selected.experiencia.local(value.experience.local);
-        model.selected.experiencia.parceiro.nome(value.experience.parceiro.nome);
+        model.selected.experiencia.descricao(value.experience.descricao || value.items.item.description);
+        model.selected.experiencia.local(value.experience.local || "Indefinido");
+        model.selected.experiencia.parceiro.nome(value.experience.parceiro.nome || "Indefinido");
         model.selected.experiencia.parceiro.contatos(model.getPartnerContacts(value.experience.parceiro.contatos));
         model.selected.experiencia.termos(model.getTermsOfUse(value.experience.termos));
 
@@ -155,7 +160,7 @@ var model = {
     },
     getPartnerContacts: function (contacts) {
         var partnerContacts = "";
-        for (var index = 0; index < contacts.length; index++) {
+        for (var index = 0; index < (contacts || []).length; index++) {
             if (contacts[index].telefone) {
                 if (partnerContacts) {
                     partnerContacts += "<br>";
@@ -171,18 +176,18 @@ var model = {
                 partnerContacts += "</a>";
             }
         }
-        return partnerContacts;
+        return partnerContacts || "Indefinido";
     },
     getTermsOfUse: function (terms) {
         var termsOfUse = "";
-        for (var index = 0; index < terms.length; index++) {
+        for (var index = 0; index < (terms || []).length; index++) {
             if (terms[index].descricao) {
                 termsOfUse += "<li>";
                 termsOfUse += terms[index].descricao;
                 termsOfUse += "</li>";
             }
         }
-        return termsOfUse;
+        return termsOfUse || "<li>Indefinido</li>";
     },
     getPhoneNumber: function (phone) {
         var phoneNumber = "";

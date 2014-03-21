@@ -26,7 +26,8 @@
                 <a target="_blank"
                    class="btn btn-default btn-edit"
                    role="button"
-                   data-bind="attr: { href: 'experiencias.html?id=' + selected.experiencia.identificador() }">
+                   data-bind="visible: selected.experiencia.identificador(),
+                   attr: { href: 'experiencias.html?id=' + selected.experiencia.identificador() }">
                     <i class="glyphicon glyphicon-pencil"></i>
                 </a>
 
@@ -129,7 +130,8 @@
 
                 <a class="btn btn-primary btn-lg"
                    role="button"
-                   data-bind="click: generateVoucher">Gerar Voucher</a>
+                   data-bind="click: generateVoucher,
+                   css: { 'disabled': !selected.experiencia.identificador() }">Gerar Voucher</a>
             </div>
         </div>
         <div data-bind="attr: { class: selected.codigo() ? 'col-sm-7' : 'col-sm-12' }">
