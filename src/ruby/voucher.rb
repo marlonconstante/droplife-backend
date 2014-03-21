@@ -4,19 +4,17 @@ require "json"
 
 class Voucher
 
-  def initialize
-  end
-
   def generate(data)
     data = JSON.parse(data)
     pattern = "{{.*?}}"
     params = {"{{EXPERIENCIA}}" => data["experiencia"]["descricao"],
               "{{CLIENTE}}" => data["cliente"]["nome"],
-              "{{PARCEIRO}}" => "Ecoaventuras",
-              "{{ENDERECO}}" => "Rua Carlos Gomes, 190 - Centro - Tr&ecirc;s Coroas - RS",
-              "{{CONTATOS}}" => "Édrei -  (51) 3546-4466",
+              "{{PARCEIRO}}" => data["experiencia"]["parceiro"]["nome"],
+              "{{ENDERECO}}" => data["experiencia"]["local"],
+              "{{CONTATOS}}" => data["experiencia"]["parceiro"]["contatos"],
               "{{VALOR_PAGO}}" => data["valorTotal"],
-              "{{NUMERO_VOUCHER}}" => data["codigo"]}
+              "{{NUMERO_VOUCHER}}" => data["codigo"],
+              "{{TERMOS_DE_USO}}" => data["experiencia"]["termos"]}
 
     @template = "src/views/templates/voucher.html"
     @outputHtml = "src/views/templates/voucher-#{params['{{NUMERO_VOUCHER}}']}.html"

@@ -1,6 +1,13 @@
 var domain = {
     experiencia: {
-        descricao: ko.observable("")
+        identificador: ko.observable(""),
+        descricao: ko.observable(""),
+        local: ko.observable(""),
+        parceiro: {
+            nome: ko.observable(""),
+            contatos: ko.observable("")
+        },
+        termos: ko.observable("")
     },
     cliente: {
         nome: ko.observable(""),
@@ -76,9 +83,17 @@ var model = {
                         type: "GET",
                         url: "/pagseguro/load/" + data.code
                     })
-                        .done(function (value) {
-                            model.update(JSON.parse(value));
-                            $tr.addClass("row-editing");
+                        .done(function (transaction) {
+                            transaction = JSON.parse(transaction);
+                            $.ajax({
+                                type: "GET",
+                                url: "/experiencia/carregar/" + transaction.items.item.id
+                            })
+                                .done(function (experience) {
+                                    transaction.experience = JSON.parse(experience);
+                                    model.update(transaction);
+                                    $tr.addClass("row-editing");
+                                });
                         });
                 }
             }
@@ -107,14 +122,22 @@ var model = {
         var oTable = $("table").dataTable({ bRetrieve: true });
         oTable.$("tr.row-editing").removeClass("row-editing");
 
-        model.selected.experiencia.descricao(value.items.item.description);
+        model.selected.experiencia.identificador(value.experience.identificador);
+        model.selected.experiencia.descricao(value.experience.descricao);
+        model.selected.experiencia.local(value.experience.local);
+        model.selected.experiencia.parceiro.nome(value.experience.parceiro.nome);
+        model.selected.experiencia.parceiro.contatos(model.getPartnerContacts(value.experience.parceiro.contatos));
+        model.selected.experiencia.termos(model.getTermsOfUse(value.experience.termos));
+
         model.selected.cliente.nome(value.sender.name);
         model.selected.cliente.email(value.sender.email);
         model.selected.cliente.telefone(model.getPhoneNumber(value.sender.phone));
+
         model.selected.metodoPagamento(model.renderPaymentMethod(value.paymentMethod.type));
         model.selected.valorTotal(model.renderMoney(value.grossAmount));
         model.selected.valorTaxa(model.renderMoney(value.feeAmount));
         model.selected.valorLiquido(model.renderMoney(value.netAmount));
+
         model.selected.situacao(model.renderStatus(value.status));
         model.selected.data(model.renderDate(value.date));
         model.selected.linkPagamento(value.paymentLink);
@@ -129,6 +152,33 @@ var model = {
             url: "/voucher/generate",
             data: JSON.stringify(value)
         });
+    },
+    getPartnerContacts: function (contacts) {
+        var partnerContacts = "";
+        for (var index = 0; index < contacts.length; index++) {
+            if (contacts[index].telefone) {
+                if (partnerContacts) {
+                    partnerContacts += "<br>";
+                }
+                if (contacts[index].nome) {
+                    partnerContacts += contacts[index].nome;
+                    partnerContacts += " - ";
+                }
+                partnerContacts += contacts[index].telefone;
+            }
+        }
+        return partnerContacts;
+    },
+    getTermsOfUse: function (terms) {
+        var termsOfUse = "";
+        for (var index = 0; index < terms.length; index++) {
+            if (terms[index].descricao) {
+                termsOfUse += "<li>";
+                termsOfUse += terms[index].descricao;
+                termsOfUse += "</li>";
+            }
+        }
+        return termsOfUse;
     },
     getPhoneNumber: function (phone) {
         var phoneNumber = "";
