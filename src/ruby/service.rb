@@ -9,19 +9,19 @@ get "/experiencia/carregar/*" do |key|
   Orchestrate.new().load("Experiencia", key)
 end
 
-get "/experiencia/pesquisa" do
+get "/parceiro/pesquisa" do
   protected!
-  Orchestrate.new().search("Experiencia", "*")
+  Orchestrate.new().search("Parceiro", "*")
 end
 
-post "/experiencia/salvar/*" do |key|
+post "/parceiro/salvar/*" do |key|
   protected!
-  Orchestrate.new().save("Experiencia", key, request.body.read)
+  Orchestrate.new().save("Parceiro", key, request.body.read)
 end
 
-delete "/experiencia/remover/*" do |key|
+delete "/parceiro/remover/*" do |key|
   protected!
-  Orchestrate.new().delete("Experiencia", key)
+  Orchestrate.new().delete("Parceiro", key)
 end
 
 post "/voucher/generate" do

@@ -1,21 +1,10 @@
 var domain = {
     identificador: ko.observable(""),
-    codigo: ko.observable(""),
-    descricao: ko.observable(""),
-    local: ko.observable(""),
-    parceiro: {
-        nome: ko.observable(""),
-        valor: ko.observable(""),
-        contatos: ko.observableArray([
-            {
-                nome: ko.observable(""),
-                telefone: ko.observable("")
-            }
-        ])
-    },
-    termos: ko.observableArray([
+    nome: ko.observable(""),
+    contatos: ko.observableArray([
         {
-            descricao: ko.observable("")
+            nome: ko.observable(""),
+            telefone: ko.observable("")
         }
     ])
 };
@@ -29,9 +18,7 @@ var model = {
         var oTable = $table.dataTable({
             aoColumns: [
                 { mData: "identificador" },
-                { mData: "descricao" },
-                { mData: "parceiro.nome" },
-                { mData: "local" }
+                { mData: "nome" }
             ]
         });
 
@@ -55,7 +42,7 @@ var model = {
     find: function () {
         $.ajax({
             type: "GET",
-            url: "/experiencia/pesquisa"
+            url: "/parceiro/pesquisa"
         })
             .done(function (data) {
                 data = JSON.parse(data);
@@ -81,7 +68,7 @@ var model = {
         var value = ko.toJS(model.selected);
         $.ajax({
             type: "POST",
-            url: "/experiencia/salvar/" + value.identificador,
+            url: "/parceiro/salvar/" + value.identificador,
             data: JSON.stringify(value)
         })
             .done(function () {
@@ -95,7 +82,7 @@ var model = {
         var value = ko.toJS(model.selected);
         $.ajax({
             type: "DELETE",
-            url: "/experiencia/remover/" + value.identificador
+            url: "/parceiro/remover/" + value.identificador
         })
             .done(function () {
                 model.find();
@@ -108,13 +95,8 @@ var model = {
         oTable.$("tr.row-editing").removeClass("row-editing");
 
         model.selected.identificador(value.identificador);
-        model.selected.codigo(value.codigo);
-        model.selected.descricao(value.descricao);
-        model.selected.local(value.local);
-        model.selected.parceiro.nome(value.parceiro.nome);
-        model.selected.parceiro.valor(value.parceiro.valor);
-        model.selected.parceiro.contatos(model.convertArray(value.parceiro.contatos));
-        model.selected.termos(model.convertArray(value.termos));
+        model.selected.nome(value.nome);
+        model.selected.contatos(model.convertArray(value.contatos));
     },
     convertArray: function (values) {
         var array = [];
