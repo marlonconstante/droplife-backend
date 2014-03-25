@@ -28,15 +28,12 @@ class PagSeguro
 
       url = "#{URL}?initialDate=#{initialDate.strftime(format)}&finalDate=#{finalDate.strftime(format)}&page=#{page}&maxPageResults=#{maxPageResults}&email=#{API_EMAIL}&token=#{API_TOKEN}"
       xml = requestXml(url)
-
-      xml
     end
 
   end
 
   def requestXml(url)
     response = Net::HTTP.get_response(URI.parse(url)).body
-    Hash.from_xml(response)
   end
 
 end
