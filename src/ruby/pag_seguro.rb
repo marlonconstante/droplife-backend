@@ -17,7 +17,7 @@ class PagSeguro
     today = DateTime.now
     format = "%Y-%m-%dT%H:%M"
 
-    transactions = Array.new
+    transactions = []
 
     while (finalDate < today)
       initialDate = finalDate + 1.minutes
@@ -29,17 +29,9 @@ class PagSeguro
       url = "#{URL}?initialDate=#{initialDate.strftime(format)}&finalDate=#{finalDate.strftime(format)}&page=#{page}&maxPageResults=#{maxPageResults}&email=#{API_EMAIL}&token=#{API_TOKEN}"
       xml = requestXml(url)
 
-      if xml["transactionSearchResult"]["transactions"]
-        xmlTransactions = xml["transactionSearchResult"]["transactions"]["transaction"]
-        if xmlTransactions.kind_of?(Array)
-          transactions.concat xmlTransactions
-        else
-          transactions << xmlTransactions
-        end
-      end
+      xml
     end
 
-    transactions.to_json
   end
 
   def requestXml(url)
