@@ -30,9 +30,17 @@ class PagSeguro
       url = "#{URL}?initialDate=#{initialDate.strftime(format)}&finalDate=#{finalDate.strftime(format)}&page=#{page}&maxPageResults=#{maxPageResults}&email=#{API_EMAIL}&token=#{API_TOKEN}"
       xml = requestXml(url)
 
+      if xml["transactionSearchResult"]["transactions"]
+        xmlTransactions = xml["transactionSearchResult"]["transactions"]["transaction"]
+        if xmlTransactions.kind_of?(Array)
+          transactions.concat xmlTransactions
+        else
+          transactions << xmlTransactions
+        end
+      end
     end
 
-    xml
+    transactions.to_json
   end
 
   def requestXml(url)
