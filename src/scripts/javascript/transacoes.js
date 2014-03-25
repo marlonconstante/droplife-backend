@@ -1,13 +1,12 @@
 var domain = {
     experiencia: {
         identificador: ko.observable(""),
-        descricao: ko.observable(""),
-        local: ko.observable(""),
-        parceiro: {
-            nome: ko.observable(""),
-            contatos: ko.observable("")
-        },
-        termos: ko.observable("")
+        descricao: ko.observable("")
+    },
+    parceiro: {
+        identificador: ko.observable(""),
+        nome: ko.observable(""),
+        contatos: ko.observable("")
     },
     cliente: {
         nome: ko.observable(""),
@@ -15,7 +14,7 @@ var domain = {
         telefone: ko.observable("")
     },
     metodoPagamento: ko.observable(""),
-    valorTotal: ko.observable(""),
+    valorBruto: ko.observable(""),
     valorTaxa: ko.observable(""),
     valorLiquido: ko.observable(""),
     situacao: ko.observable(""),
@@ -24,11 +23,15 @@ var domain = {
     codigo: ko.observable("")
 };
 
-var emptyTransaction = {
+var empty = {
     items: {
         item: {
             description: ""
         }
+    },
+    partner: {
+        nome: "Indefinido",
+        contatos: []
     },
     sender: {
         name: "",
@@ -52,8 +55,7 @@ var emptyTransaction = {
 
 var model = {
     selected: domain,
-    emptyExperience: ko.toJS(domain.experiencia),
-    emptyTransaction: emptyTransaction,
+    empty: empty,
     init: function () {
         moment.lang("pt-BR");
 
@@ -69,7 +71,8 @@ var model = {
                 { mData: "paymentMethod.type", mRender: model.renderPaymentMethod },
                 { mData: "status", mRender: model.renderStatus },
                 { mData: "grossAmount", sType: "accounting", mRender: model.renderMoney},
-                { mData: "code" }
+                { mData: "netAmount", sType: "accounting", mRender: model.renderMoney},
+                { mData: "partner.nome" }
             ]
         });
 
@@ -86,19 +89,9 @@ var model = {
                     })
                         .done(function (transaction) {
                             transaction = JSON.parse(transaction);
-                            $.ajax({
-                                type: "GET",
-                                url: "/experiencia/carregar/" + transaction.items.item.id
-                            })
-                                .done(function (experience) {
-                                    experience = JSON.parse(experience);
-                                    if (experience.message) {
-                                        experience = model.emptyExperience;
-                                    }
-                                    transaction.experience = experience;
-                                    model.update(transaction);
-                                    $tr.addClass("row-editing");
-                                });
+                            transaction.partner = data.partner;
+                            model.update(transaction);
+                            $tr.addClass("row-editing");
                         });
                 }
             }
@@ -109,37 +102,55 @@ var model = {
         });
     },
     find: function () {
-        $.ajax({
+        var requestPartner = $.ajax({
+            type: "GET",
+            url: "/parceiro/pesquisa"
+        });
+
+        var requestPagSeguro = $.ajax({
             type: "GET",
             url: "/pagseguro/search"
-        })
-            .done(function (data) {
-                var values = JSON.parse(data);
+        });
+
+        $.when(requestPartner, requestPagSeguro).done(
+            function (responsePartner, responsePagSeguro) {
+                var partnerMap = {};
+                var partners = JSON.parse(responsePartner[0]);
+                for (var index = 0; index < partners.count; index++) {
+                    var value = partners.results[index].value;
+                    partnerMap[value.identificador] = value;
+                }
+
+                var transactions = JSON.parse(responsePagSeguro[0]);
+                for (var index = 0; index < transactions.length; index++) {
+                    transactions[index].partner = partnerMap[transactions[index].reference] || model.empty.partner;
+                }
 
                 var oTable = $("table").dataTable({ bRetrieve: true });
                 oTable.fnClearTable();
-                oTable.fnAddData(values);
-            });
+                oTable.fnAddData(transactions);
+            }
+        );
     },
     update: function (value) {
-        value = value || model.emptyTransaction;
+        value = value || model.empty;
 
         var oTable = $("table").dataTable({ bRetrieve: true });
         oTable.$("tr.row-editing").removeClass("row-editing");
 
-        model.selected.experiencia.identificador(value.experience.identificador);
-        model.selected.experiencia.descricao(value.experience.descricao || value.items.item.description);
-        model.selected.experiencia.local(value.experience.local || "Indefinido");
-        model.selected.experiencia.parceiro.nome(value.experience.parceiro.nome || "Indefinido");
-        model.selected.experiencia.parceiro.contatos(model.getPartnerContacts(value.experience.parceiro.contatos));
-        model.selected.experiencia.termos(model.getTermsOfUse(value.experience.termos));
+        model.selected.parceiro.identificador(value.partner.identificador);
+        model.selected.parceiro.nome(value.partner.nome);
+        model.selected.parceiro.contatos(model.getPartnerContacts(value.partner.contatos));
+
+        model.selected.experiencia.identificador(value.items.item.id);
+        model.selected.experiencia.descricao(value.items.item.description);
 
         model.selected.cliente.nome(value.sender.name);
         model.selected.cliente.email(value.sender.email);
         model.selected.cliente.telefone(model.getPhoneNumber(value.sender.phone));
 
         model.selected.metodoPagamento(model.renderPaymentMethod(value.paymentMethod.type));
-        model.selected.valorTotal(model.renderMoney(value.grossAmount));
+        model.selected.valorBruto(model.renderMoney(value.grossAmount));
         model.selected.valorTaxa(model.renderMoney(value.feeAmount));
         model.selected.valorLiquido(model.renderMoney(value.netAmount));
 
@@ -160,7 +171,7 @@ var model = {
     },
     getPartnerContacts: function (contacts) {
         var partnerContacts = "";
-        for (var index = 0; index < (contacts || []).length; index++) {
+        for (var index = 0; index < contacts.length; index++) {
             if (contacts[index].telefone) {
                 if (partnerContacts) {
                     partnerContacts += "<br>";
@@ -177,17 +188,6 @@ var model = {
             }
         }
         return partnerContacts || "Indefinido";
-    },
-    getTermsOfUse: function (terms) {
-        var termsOfUse = "";
-        for (var index = 0; index < (terms || []).length; index++) {
-            if (terms[index].descricao) {
-                termsOfUse += "<li>";
-                termsOfUse += terms[index].descricao;
-                termsOfUse += "</li>";
-            }
-        }
-        return termsOfUse || "<li>Indefinido</li>";
     },
     getPhoneNumber: function (phone) {
         var phoneNumber = "";

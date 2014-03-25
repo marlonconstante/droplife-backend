@@ -2,6 +2,7 @@
 source "https://rubygems.org"
 ruby "2.1.1"
 
+gem "nokogiri"
 gem "json"
 gem "sinatra", "~> 1.4.4"
 gem "orchestrate.io", :git => "https://github.com/marlonconstante/ruby-orchestrate.io.git"

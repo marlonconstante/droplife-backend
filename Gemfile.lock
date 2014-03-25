@@ -23,8 +23,11 @@ GEM
     json (1.7.7)
     launchy (2.4.2)
       addressable (~> 2.3)
+    mini_portile (0.5.2)
     multi_json (1.9.0)
     multi_xml (0.5.5)
+    nokogiri (1.6.1)
+      mini_portile (~> 0.5.0)
     pdfkit (0.6.1)
     rack (1.5.2)
     rack-protection (1.5.2)
@@ -49,6 +52,7 @@ DEPENDENCIES
   activesupport (~> 3.2.9)
   json
   launchy
+  nokogiri
   orchestrate.io!
   pdfkit
   sinatra (~> 1.4.4)
