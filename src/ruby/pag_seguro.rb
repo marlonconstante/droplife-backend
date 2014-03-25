@@ -7,7 +7,6 @@ class PagSeguro
 
   def load(code)
     url = "#{URL}/#{code}?email=#{API_EMAIL}&token=#{API_TOKEN}"
-    requestXml(url)["transaction"].to_json
   end
 
   def search
@@ -19,12 +18,32 @@ class PagSeguro
 
     transactions = []
 
-    finalDate
+    while (finalDate < today)
+      initialDate = finalDate + 1.minutes
+      finalDate += 29.days
+      if (finalDate > today)
+        finalDate = today
+      end
 
+      url = "#{URL}?initialDate=#{initialDate.strftime(format)}&finalDate=#{finalDate.strftime(format)}&page=#{page}&maxPageResults=#{maxPageResults}&email=#{API_EMAIL}&token=#{API_TOKEN}"
+      xml = requestXml(url)
+
+      if xml["transactionSearchResult"]["transactions"]
+        xmlTransactions = xml["transactionSearchResult"]["transactions"]["transaction"]
+        if xmlTransactions.kind_of?(Array)
+          transactions.concat xmlTransactions
+        else
+          transactions << xmlTransactions
+        end
+      end
+    end
+
+    transactions.to_json
   end
 
   def requestXml(url)
     response = Net::HTTP.get_response(URI.parse(url)).body
+    Hash.from_xml(response)
   end
 
 end
