@@ -13,15 +13,16 @@ class PagSeguro
   def search
     page = 1
     maxPageResults = 1000
-    finalDate = 3.months.ago
+    minute = 1.0 / 24.0 / 60.0
     today = DateTime.now
+    finalDate = today - 90
     format = "%Y-%m-%dT%H:%M"
 
     transactions = []
 
     while (finalDate < today)
-      initialDate = finalDate + 1.minutes
-      finalDate += 29.days
+      initialDate = finalDate + minute
+      finalDate += 29
       if (finalDate > today)
         finalDate = today
       end
