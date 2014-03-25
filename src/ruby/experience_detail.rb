@@ -1,7 +1,7 @@
 require "nokogiri"
 require "open-uri"
 
-class Detail
+class ExperienceDetail
   URL = "http://droplife.com.br/views/html/detail"
 
   def map(key)

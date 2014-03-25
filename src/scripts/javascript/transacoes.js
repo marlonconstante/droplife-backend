@@ -175,7 +175,7 @@ var model = {
         if (key) {
             $.ajax({
                 type: "GET",
-                url: "/detail/" + key
+                url: "/experiencia/detalhe/" + key
             }).done(function (data) {
                     data = JSON.parse(data);
                     model.selected.experiencia.termos = data.termsOfUse;

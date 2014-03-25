@@ -3,10 +3,10 @@ require_relative "security"
 require_relative "orchestrate"
 require_relative "voucher"
 require_relative "pag_seguro"
-require_relative "detail"
+require_relative "experience_detail"
 
-get "/detail/*" do |key|
-  Detail.new().map(key)
+get "/experiencia/detalhe/*" do |key|
+  ExperienceDetail.new().map(key)
 end
 
 get "/parceiro/pesquisa" do
