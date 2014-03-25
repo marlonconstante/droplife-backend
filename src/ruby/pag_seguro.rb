@@ -17,7 +17,7 @@ class PagSeguro
     today = DateTime.now
     format = "%Y-%m-%dT%H:%M"
 
-    transactions = []
+    transactions = Array.new
 
     while (finalDate < today)
       initialDate = finalDate + 1.minutes
