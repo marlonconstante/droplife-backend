@@ -172,14 +172,16 @@ var model = {
         });
     },
     detail: function (key) {
-        $.ajax({
-            type: "GET",
-            url: "/detail/" + key
-        }).done(function (data) {
-                data = JSON.parse(data);
-                model.selected.experiencia.termos = data.termsOfUse;
-                model.selected.experiencia.local = data.local;
-            });
+        if (key) {
+            $.ajax({
+                type: "GET",
+                url: "/detail/" + key
+            }).done(function (data) {
+                    data = JSON.parse(data);
+                    model.selected.experiencia.termos = data.termsOfUse;
+                    model.selected.experiencia.local = data.local;
+                });
+        }
     },
     getPartnerContacts: function (contacts) {
         var partnerContacts = "";
