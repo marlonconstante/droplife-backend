@@ -10,7 +10,7 @@ gem "pdfkit"
 gem "wkhtmltopdf-binary"
 gem "launchy"
 gem "thread_safe", "~> 0.2.0"
-gem "activesupport", "~> 3.2.9"
+gem "activesupport"
 gem "thin"
 
 # gem "rails"
