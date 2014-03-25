@@ -19,15 +19,7 @@ class PagSeguro
 
     transactions = []
 
-    while (finalDate < today)
-      initialDate = finalDate + 1.minutes
-      finalDate += 29.days
-      if (finalDate > today)
-        finalDate = today
-      end
-
-      url = "#{URL}?initialDate=#{initialDate.strftime(format)}&finalDate=#{finalDate.strftime(format)}&page=#{page}&maxPageResults=#{maxPageResults}&email=#{API_EMAIL}&token=#{API_TOKEN}"
-    end
+    finalDate
 
   end
 
