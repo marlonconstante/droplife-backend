@@ -138,6 +138,8 @@ var model = {
         var oTable = $("table").dataTable({ bRetrieve: true });
         oTable.$("tr.row-editing").removeClass("row-editing");
 
+        model.detail(value.items.item.id);
+
         model.selected.parceiro.identificador(value.partner.identificador);
         model.selected.parceiro.nome(value.partner.nome);
         model.selected.parceiro.contatos(model.getPartnerContacts(value.partner.contatos));
@@ -168,6 +170,16 @@ var model = {
             url: "/voucher/generate",
             data: JSON.stringify(value)
         });
+    },
+    detail: function (key) {
+        $.ajax({
+            type: "GET",
+            url: "/detail/" + key
+        }).done(function (data) {
+                data = JSON.parse(data);
+                model.selected.experiencia.termos = data.termsOfUse;
+                model.selected.experiencia.local = data.local;
+            });
     },
     getPartnerContacts: function (contacts) {
         var partnerContacts = "";

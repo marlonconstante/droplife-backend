@@ -9,10 +9,10 @@ class Voucher
     pattern = "{{.*?}}"
     params = {"{{EXPERIENCIA}}" => data["experiencia"]["descricao"],
               "{{CLIENTE}}" => data["cliente"]["nome"],
-              "{{PARCEIRO}}" => data["experiencia"]["parceiro"]["nome"],
+              "{{PARCEIRO}}" => data["parceiro"]["nome"],
               "{{ENDERECO}}" => data["experiencia"]["local"],
-              "{{CONTATOS}}" => data["experiencia"]["parceiro"]["contatos"],
-              "{{VALOR_PAGO}}" => data["valorTotal"],
+              "{{CONTATOS}}" => data["parceiro"]["contatos"],
+              "{{VALOR_PAGO}}" => data["valorBruto"],
               "{{NUMERO_VOUCHER}}" => data["codigo"],
               "{{TERMOS_DE_USO}}" => data["experiencia"]["termos"]}
 
