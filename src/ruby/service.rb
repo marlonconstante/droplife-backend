@@ -50,5 +50,5 @@ get "/cadastro/*/*" do |path, file|
 end
 
 get "/" do
-  redirect to("/cadastro/views/html/transacoes.html")
+  redirect to("/cadastro/views/html/parceiros.html")
 end

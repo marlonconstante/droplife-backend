@@ -1,6 +1,9 @@
 body {
-    padding: 0 2em;
     font-size: 1.2em;
+}
+
+body > .container-fluid > .row {
+    padding: 0 2em;
 }
 
 a {
@@ -9,6 +12,15 @@ a {
 
 label {
     margin-top: 0.5em;
+}
+
+.navbar {
+    border-radius: 0;
+    margin-bottom: 5px;
+}
+
+.navbar-nav {
+    margin: 0 -15px;
 }
 
 .panel-info label {
@@ -27,24 +39,14 @@ h1, h2, h3, h4, h5, h6 {
     margin: 0.5em 0 0.5em;
 }
 
-@media (max-width: 767px) {
-    .logo {
-        text-align: center;
-    }
-
-    .logo img {
-        width: 65%;
-    }
+.logo img {
+    width: 10.1em;
 }
 
 @media (min-width: 768px) {
     .logo {
         float: right;
-        margin-top: 0.7em;
-    }
-
-    .logo img {
-        width: 10.1em;
+        margin-top: 0.3em;
     }
 }
 
@@ -64,10 +66,6 @@ h1, h2, h3, h4, h5, h6 {
 
 .panel-info .btn {
     margin-top: 0.25em;
-}
-
-.panel-info .btn-edit {
-    float: right;
 }
 
 .panel-group {
