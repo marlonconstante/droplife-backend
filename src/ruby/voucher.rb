@@ -17,7 +17,7 @@ class Voucher
               "{{NUMERO_VOUCHER}}" => data["codigo"],
               "{{TERMOS_DE_USO}}" => data["experiencia"]["termos"]}
 
-    @key = "voucher-#{params['{{NUMERO_VOUCHER}}']}"
+    @key = "voucher-droplife-#{params['{{NUMERO_VOUCHER}}']}"
     @template = "src/views/templates/voucher.html"
     @out = File.open(@template).read.gsub(/#{pattern}/, params)
     @pdf = PDFKit.new(@out)
