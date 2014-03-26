@@ -48,3 +48,7 @@ get "/cadastro/*/*" do |path, file|
   protected!
   send_file "src/#{path}/#{file}"
 end
+
+get "/" do
+  redirect to("/cadastro/views/html/transacoes.html")
+end
