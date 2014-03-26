@@ -1,5 +1,4 @@
 require "pdfkit"
-require "launchy"
 require "json"
 
 class Voucher
@@ -17,20 +16,10 @@ class Voucher
               "{{TERMOS_DE_USO}}" => data["experiencia"]["termos"]}
 
     @template = "src/views/templates/voucher.html"
-    @outputHtml = "src/views/templates/voucher-#{params['{{NUMERO_VOUCHER}}']}.html"
-    @outputPdf = "files/voucher-#{params['{{NUMERO_VOUCHER}}']}.pdf"
+    @outfile = File.open(@template).read.gsub(/#{pattern}/, params)
+    @pdf = PDFKit.new(@outfile)
 
-    File.open(@outputHtml, 'w') do |out|
-      out << File.open(@template).read.gsub(/#{pattern}/, params)
-    end
-
-    @pdf = PDFKit.new(File.new(@outputHtml))
-
-
-    @pdf.to_file(@outputPdf)
-    Launchy::Browser.run(@outputPdf)
-
-    File.delete(@outputHtml)
+    [200, {"Content-Type" => "application/pdf", "Content-Disposition" => "attachment", "filename" => "voucher.pdf"}, @pdf.to_pdf]
   end
 
 end

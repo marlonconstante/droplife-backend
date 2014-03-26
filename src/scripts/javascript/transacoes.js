@@ -138,7 +138,7 @@ var model = {
         var oTable = $("table").dataTable({ bRetrieve: true });
         oTable.$("tr.row-editing").removeClass("row-editing");
 
-        model.detail(value.items.item.id);
+        model.loadExperienceDetail(value.items.item.id);
 
         model.selected.parceiro.identificador(value.partner.identificador);
         model.selected.parceiro.nome(value.partner.nome);
@@ -169,9 +169,11 @@ var model = {
             type: "POST",
             url: "/voucher/generate",
             data: JSON.stringify(value)
-        });
+        }).done(function (data) {
+                console.log(data)
+            });
     },
-    detail: function (key) {
+    loadExperienceDetail: function (key) {
         if (key) {
             $.ajax({
                 type: "GET",
