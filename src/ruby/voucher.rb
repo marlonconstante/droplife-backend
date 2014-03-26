@@ -3,6 +3,8 @@ require "json"
 
 class Voucher
 
+  @@map = {}
+
   def generate(data)
     data = JSON.parse(data)
     pattern = "{{.*?}}"
@@ -15,11 +17,18 @@ class Voucher
               "{{NUMERO_VOUCHER}}" => data["codigo"],
               "{{TERMOS_DE_USO}}" => data["experiencia"]["termos"]}
 
+    @key = "voucher-#{params['{{NUMERO_VOUCHER}}']}"
     @template = "src/views/templates/voucher.html"
-    @outfile = File.open(@template).read.gsub(/#{pattern}/, params)
-    @pdf = PDFKit.new(@outfile)
+    @out = File.open(@template).read.gsub(/#{pattern}/, params)
+    @pdf = PDFKit.new(@out)
+    @@map = {@key => @pdf.to_pdf}
+    @key
+  end
 
-    [200, {"Content-Type" => "application/pdf", "Content-Disposition" => "attachment", "filename" => "voucher.pdf"}, @pdf.to_pdf]
+  def download(key)
+    @pdf = @@map[key]
+    @@map.delete(key)
+    [200, {"Content-Type" => "application/pdf", "Content-Disposition" => "attachment"}, @pdf]
   end
 
 end

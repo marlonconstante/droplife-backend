@@ -169,8 +169,8 @@ var model = {
             type: "POST",
             url: "/voucher/generate",
             data: JSON.stringify(value)
-        }).done(function (data) {
-                console.log(data)
+        }).done(function (key) {
+                document.location.href = "/voucher/download/" + key;
             });
     },
     loadExperienceDetail: function (key) {

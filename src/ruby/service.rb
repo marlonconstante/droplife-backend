@@ -29,6 +29,11 @@ post "/voucher/generate" do
   Voucher.new().generate(request.body.read);
 end
 
+get "/voucher/download/*" do |key|
+  protected!
+  Voucher.new().download(key);
+end
+
 get "/pagseguro/load/*" do |code|
   protected!
   PagSeguro.new().load(code);
