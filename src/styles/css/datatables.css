@@ -34,11 +34,10 @@
 }
 
 .dataTables_length select {
-    width: 60px;
+    margin-left: 3.2em;
 }
 
 .dataTables_length,
-.dataTables_length select,
 .dataTables_info,
 .dataTables_paginate {
     float: right;
